@@ -2,12 +2,12 @@ package main
 
 import (
 	"log"
-	"net/http"
+	//"net/http"
 
 	"chat"
 )
 
-func main() {
+func init() {
 	log.SetFlags(log.Lshortfile)
 
 	// websocket server
@@ -15,7 +15,7 @@ func main() {
 	go server.Listen()
 
 	// static files
-	http.Handle("/", http.FileServer(http.Dir("webroot")))
+	// http.Handle("/", http.FileServer(http.Dir("webroot")))
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	// log.Fatal(http.ListenAndServe(":8080", nil))
 }

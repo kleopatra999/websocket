@@ -1,0 +1,19 @@
+application: sandbox4sinmetal-tg
+version: mvm20140622a
+runtime: go
+api_version: go1
+
+vm: true
+manual_scaling:
+  instances: 1
+vm_settings:
+  machine_type: n1-standard-1
+  apt_get_install: redis-server vim
+
+handlers:
+- url: /webroot
+  static_dir: webroot
+
+- url: /.*
+  script: _go_app
+  login: required
