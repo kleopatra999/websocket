@@ -1,14 +1,15 @@
 application: sandbox4sinmetal-tg
-module: simple-gae
-version: 201408021343
+module: simple-gae-mvm
+version: 201408021435
 runtime: go
 api_version: go1
 
-instance_class: F1
-automatic_scaling:
-  min_idle_instances: 0
-  max_idle_instances: 1
-  min_pending_latency: automatic  # default value
+vm: true
+manual_scaling:
+  instances: 1
+vm_settings:
+  machine_type: n1-standard-1
+  apt_get_install: redis-server vim
 
 
 handlers:

@@ -1,30 +1,26 @@
 package simplegae
 
 import (
-	"appengine"
 	"encoding/json"
+	"google.golang.org/appengine"
 	"net/http"
 )
 
 type ServerInfo struct {
 	AppID                  string
-	BackendHostname        string
-	BackendInstanceName    string
 	BackendInstanceIndex   int
 	Datacenter             string
 	DefaultVersionHostname string
 	InstanceID             string
-	IsCapabilityDisabled   bool
 	IsDevAppServer         bool
 	IsOverQuota            bool
 	IsTimeoutError         bool
 	ModuleHostname         string
 	ModuleName             string
-	// PublicCertificates
-	RequestID      string
-	ServerSoftware string
-	ServiceAccount string
-	VersionID      string
+	RequestID              string
+	ServerSoftware         string
+	ServiceAccount         string
+	VersionID              string
 }
 
 func init() {
@@ -37,12 +33,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	var err error
 	s := ServerInfo{}
 	s.AppID = appengine.AppID(c)
-	s.BackendHostname = appengine.BackendHostname(c, "name", 0)
-	s.BackendInstanceName, s.BackendInstanceIndex = appengine.BackendInstance(c)
-	s.Datacenter = appengine.Datacenter()
+	s.Datacenter = appengine.Datacenter(c)
 	s.DefaultVersionHostname = appengine.DefaultVersionHostname(c)
 	s.InstanceID = appengine.InstanceID()
-	s.IsCapabilityDisabled = appengine.IsCapabilityDisabled(err)
 	s.IsDevAppServer = appengine.IsDevAppServer()
 	s.IsOverQuota = appengine.IsOverQuota(err)
 	s.IsTimeoutError = appengine.IsTimeoutError(err)
