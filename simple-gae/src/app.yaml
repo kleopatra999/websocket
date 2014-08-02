@@ -1,0 +1,12 @@
+application: sandbox4sinmetal-tg
+version: mvm20140717a
+runtime: go
+api_version: go1
+
+handlers:
+- url: /webroot
+  static_dir: webroot
+
+- url: /.*
+  script: _go_app
+  login: required
